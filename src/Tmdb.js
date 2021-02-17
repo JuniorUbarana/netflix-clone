@@ -12,8 +12,13 @@ export default {
     return [
       {
         slug: 'originals',
-        title: 'Séries',
-        items: await basicFetch(`/discover/tv/?with_network=213&api_key=${API_KEY}&language=pt-BR`)
+        title: 'Originais Netflix',
+        items: await basicFetch(`/discover/tv/?with_networks=213&api_key=${API_KEY}&language=pt-BR&include_null_first_air_dates=false`)
+      },
+      {
+        slug: 'disney',
+        title: 'Originais Disney+',
+        items: await basicFetch(`/discover/tv/?with_networks=2739&api_key=${API_KEY}&language=pt-BR&include_null_first_air_dates=false`)
       },
       {
         slug: 'trending',
@@ -70,5 +75,23 @@ export default {
         items: await basicFetch(`/discover/movie/?with_genres=80&api_key=${API_KEY}&language=pt-BR`)
       }
     ]
+  },
+
+  getMovieInfo : async (movieId, type) => {
+    let info = {}
+
+    if(movieId){
+      switch(type){
+        case 'movie':
+          info = await basicFetch(`/movie/${movieId}?api_key=${API_KEY}&language=pt-BR`);
+        break;
+
+        case 'tv':
+          info = await basicFetch(`/tv/${movieId}?api_key=${API_KEY}&language=pt-BR`);
+        break;
+      }
+    }
+
+    return info;
   }
 }

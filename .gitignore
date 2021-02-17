@@ -1,1 +1,4 @@
+.gitignore
+.eslintcache
+
 node_modules/
