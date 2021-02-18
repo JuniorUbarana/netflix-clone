@@ -12,8 +12,8 @@ export default ({item}) => {
   }
 
   let descr = item.overview;
-  if(descr.length > 200){
-    descr = descr.substring(0, 200)  + '...';
+  if(descr.length > 160){
+    descr = descr.substring(0, 160)  + '...';
   }
 
   return (
